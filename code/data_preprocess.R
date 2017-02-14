@@ -98,9 +98,9 @@ data_all$type <- NULL
 # Can't make a model matrix becase "contrasts can be applied only to factors w 2 or more levels
 # Must do below first
 # get names of factor variables
-l    <- sapply(data_all, function(x) is.factor(x))
-m    <- data_all[,names(which(l==TRUE))]
-good <- ifelse(n<-sapply(m,function(x)length(levels(x)))==1,"DROP","NODROP")
+factors    <- sapply(data_all, function(x) is.factor(x))
+factors    <- data_all[,names(which(l==TRUE))]
+good <- ifelse(n<-sapply(factors,function(x)length(levels(x)))==1,"DROP","NODROP")
 
 
 data_all_matrix               <- as.data.frame(model.matrix( ~ ., data = data_all))
