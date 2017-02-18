@@ -100,5 +100,5 @@ train_x$SalePrice <- y_train
 
 
 # Save data
-#write.csv(train_x, file = "data/cleanData/clean_train.csv")
-#write.csv(test_x, file = "data/cleanData/clean_test.csv")
+save(train_x, file = "data/cleanData/clean_train.RData")
+save(test_x, file = "data/cleanData/clean_test.RData")
