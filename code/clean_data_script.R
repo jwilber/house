@@ -48,10 +48,10 @@ for(f in features){
 }
 
 #feature to exclude
-features_to_drop<-c("Utilities","LotFrontage","Alley","MasVnrType","MasVnrArea","BsmtQual",
+features_to_drop<-c("Utilities","MasVnrType","MasVnrArea",
                     "BsmtCond","BsmtExposure","BsmtFinType1","BsmtFinType2",
                     "Electrical","FireplaceQu","GarageType","GarageYrBlt",
-                    "GarageFinish","GarageQual","GarageCond","PoolQC",
+                    "GarageQual","GarageCond",
                     "Fence","MiscFeature")
 
 
@@ -67,7 +67,8 @@ to_impute <- as.data.frame(test_x)
 impute <- to_impute[c("MSZoning","Exterior1st","Exterior2nd","BsmtFinSF1",
                    "BsmtFinSF2","BsmtUnfSF","TotalBsmtSF","BsmtFullBath","BsmtHalfBath",
                    "KitchenQual","Functional","GarageCars","GarageArea","SaleType", "YrSold_YearBuilt", 
-                   "YearRemodel_YearBuilt", "YrSold_YearRemodel")]
+                   "YearRemodel_YearBuilt", "YrSold_YearRemodel","GarageFinish","BsmtQual",
+                   "PoolQC", "LotFrontage", "Alley")]
 imputed <- complete(mice(impute,m=2))
 
 to_impute$MSZoning              <- imputed$MSZoning
@@ -88,6 +89,13 @@ to_impute$SaleType              <- imputed$SaleType
 to_impute$YrSold_YearBuilt      <- imputed$YrSold_YearBuilt
 to_impute$YearRemodel_YearBuilt <- imputed$YearRemodel_YearBuilt
 to_impute$YrSold_YearRemodel    <- imputed$YrSold_YearRemodel
+to_impute$GarageFinish          <- imputed$GarageFinish
+to_impute$BsmtQual              <- imputed$BsmtQual
+to_impute$PoolQC                <- imputed$PoolQC
+to_impute$LotFrontage           <- imputed$LotFrontage
+to_impute$Alley                 <- imputed$Alley
+
+
 
 
 test_x <- as.data.table(to_impute)
@@ -96,9 +104,9 @@ test_x <- as.data.table(to_impute)
 
 train_x[] <- lapply(train_x, as.numeric)
 test_x[]<-lapply(test_x, as.numeric)
-train_x$SalePrice <- y_train
 
 
 # Save data
 save(train_x, file = "data/cleanData/clean_train.RData")
 save(test_x, file = "data/cleanData/clean_test.RData")
+save(y_train, file="data/cleanData/clean_label.RData")
