@@ -107,6 +107,11 @@ test_x[]<-lapply(test_x, as.numeric)
 
 
 # Save data
-save(train_x, file = "data/cleanData/clean_train.RData")
-save(test_x, file = "data/cleanData/clean_test.RData")
-save(y_train, file="data/cleanData/clean_label.RData")
+# save(train_x, file = "data/cleanData/clean_train.RData")
+# save(test_x, file = "data/cleanData/clean_test.RData")
+# save(y_train, file="data/cleanData/clean_label.RData")
+# 
+# write.csv(train_x, file = "data/cleanData/clean_train.csv")
+# write.csv(test_x, file = "data/cleanData/clean_test.csv")
+# write.csv(y_train, file="data/cleanData/clean_label.csv")
+
