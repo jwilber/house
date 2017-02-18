@@ -1,6 +1,7 @@
 # ====================================================================================
 # load utils functions to use and import libraries
 # ====================================================================================
+setwd("~/Desktop/house/code/")
 source("utils.R")
 
 library(dplyr)
@@ -35,7 +36,7 @@ data_test$SalePrice <- 0
 
 
 # Scale log transform outcome variable so large deviations don't have a large effect
-data_train$SalePrice <- log(data_train$SalePrice + 1)
+#data_train$SalePrice <- log(data_train$SalePrice + 1)
 
 # ESD: Keep only observations in range [mean - 3*sd, mean + 3*sd]
 upper_range         <- mean(data_train$SalePrice) + 3 * sd(data_train$SalePrice)
@@ -84,8 +85,8 @@ data_all$garage_exist     <- as.factor(data_all$GarageArea != 0)
 data_all$masVnrArea_exist <- as.factor(data_all$MasVnrArea != 0)
 
 
-data_all$LotArea   <- log(data_all$LotArea + 1)
-data_all$GrLivArea <- log(data_all$GrLivArea + 1)
+# data_all$LotArea   <- log(data_all$LotArea + 1)
+# data_all$GrLivArea <- log(data_all$GrLivArea + 1)
 
 
 data_type     <- data_all$data_type
@@ -95,7 +96,7 @@ data_all$type <- NULL
 # Must do below first
 # get names of factor variables
 factors    <- sapply(data_all, function(x) is.factor(x))
-factors    <- data_all[,names(which(l==TRUE))]
+factors    <- data_all[,names(which(factors==TRUE))]
 good <- ifelse(n<-sapply(factors,function(x)length(levels(x)))==1,"DROP","NODROP")
 
 
@@ -107,34 +108,8 @@ data_all_matrix$data_type     <- data_type
 # ====================================================================================
 # Save cleaned datasets
 # ====================================================================================
-#save(data_all, file = "../data/cleanedData/data_all.RData")
-#save(data_all_matrix, file = "../data/cleanedData/data_all_matrix.RData")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# save(data_all, file = "data/cleanData/data_all.RData")
+# save(data_all_matrix, file = "data/cleanData/data_all_matrix.RData")
+# 
+# write.csv(data_all, file = "data/cleanData/data_all.csv")
+# write.csv(data_all_matrix, file = "data/cleanData/data_all_matrix.csv")
